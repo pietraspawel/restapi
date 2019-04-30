@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !(\.js$|\.css$|\.css.map$|\.png$|\.jpg$|\.jpeg$|\.gif$|\.html$)
+RewriteRule .* index.php [L]
