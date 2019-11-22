@@ -1,70 +1,200 @@
 <?php
+
 namespace pietras;
-class RestApp {
-	private $debug = false;
-	private $url1, $url2;
-	private $page, $pagesize;
-	private $requestMethod;
 
-	public function __construct() {
-		$this->setDebug(false);
-		$router = new Router();
-		$this->url1 = StringMethods::smallPlToLatin($router->getPathElement(1));
-		$this->url2 = StringMethods::smallPlToLatin($router->getPathElement(2));
-		$this->page = $this->calculatePage($router);
-		$this->pagesize = $this->calculatePagesize($router);
-		$this->requestMethod = $_SERVER["REQUEST_METHOD"];
-	}
+/**
+ * Stores applications states and provide respond methods.
+ */
+class RestApp
+{
+    /**
+     * @var boolean $debug Tells if debug mode is on or not.
+     */
+    private $debug = false;
+    /**
+     * @var string $url1 Store first element of URL.
+     */
+    private $url1;
+    /**
+     * @var string $url1 Store second element of URL.
+     */
+    private $url2;
+    /**
+     * @var int $page Store page number argument from URL.
+     */
+    private $page;
+    /**
+     * @var int $pagesize Store size of page agument from URL.
+     */
+    private $pagesize;
+    /**
+     * @var $requestMethod Store value from $_SERVER["REQUEST_METHOD"].
+     */
+    private $requestMethod;
 
-		private function calculatePage($router) {
-			$urlParams = $router->getParams();
-			$page = array_key_exists("page", $urlParams)? intval($urlParams["page"]): 1;
-			if ($page < 1) $page = 1;
-			return $page;
-		}
+    /**
+     * Class constructor.
+     *
+     * Has no parameters. Set properties from cofig file and url.
+     */
+    public function __construct()
+    {
+        $this->setDebug(false);
+        $router = new Router();
+        $this->url1 = StringMethods::smallPlToLatin($router->getPathElement(1));
+        $this->url2 = StringMethods::smallPlToLatin($router->getPathElement(2));
+        $this->page = $this->calculatePage($router);
+        $this->pagesize = $this->calculatePagesize($router);
+        $this->requestMethod = $_SERVER["REQUEST_METHOD"];
+    }
 
-		private function calculatePagesize($router) {
-			$urlParams = $router->getParams();
-			$pagesize = array_key_exists("pagesize", $urlParams)? intval($urlParams["pagesize"]): 10;
-			if ($pagesize < 10) $pagesize = 10;
-			return $pagesize;
-		}
+    /**
+     * Calculate page number.
+     *
+     * Extract from url. Default is 1. Should be 1 or more.
+     *
+     * @param  Router $router
+     * @return int
+     */
+    private function calculatePage(Router $router): int
+    {
+        $urlParams = $router->getParams();
+        $page = array_key_exists("page", $urlParams) ? intval($urlParams["page"]) : 1;
+        if ($page < 1) {
+            $page = 1;
+        }
+        return $page;
+    }
 
-	public function setDebug($value) { 
-		$this->debug = $value;
-		if ($this->debug) error_reporting(E_ALL);
-		else error_reporting(0); 
-		return $this; 
-	}
-	public function getDebug() { return $this->debug; }
+    /**
+     * Calculate page size.
+     *
+     * Extract from ur. Default is 10. Should be 10 or more.
+     *
+     * @param  Router $router
+     * @return int
+     */
+    private function calculatePagesize(Router $router): int
+    {
+        $urlParams = $router->getParams();
+        $pagesize = array_key_exists("pagesize", $urlParams) ? intval($urlParams["pagesize"]) : 10;
+        if ($pagesize < 10) {
+            $pagesize = 10;
+        }
+        return $pagesize;
+    }
 
-	public function getUrl1() { return $this->url1; }
-	public function getUrl2() { return $this->url2; }
+    /**
+     * Set error reporting depending $value.
+     *
+     * @param bool $value
+     */
+    public function setDebug(bool $value): self
+    {
+        $this->debug = $value;
+        if ($this->debug) {
+            error_reporting(E_ALL);
+        } else {
+            error_reporting(0);
+        }
+        return $this;
+    }
 
-	public function getPage() { return $this->page; }
-	public function getPageSize() { return $this->pagesize; }
+    /**
+     * @return bool
+     */
+    public function getDebug(): bool
+    {
+        return $this->debug;
+    }
 
-	public function getRequestMethod() { return $this->requestMethod; }
+    /**
+     * @return string
+     */
+    public function getUrl1(): string
+    {
+        return $this->url1;
+    }
 
-	public function send200forGET($json) {
-		header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
-		header("Cache-Control: public, max-age=86400");
-		header('Content-Type: application/json');
-		echo json_encode($json);
-	}
+    /**
+     * @return string
+     */
+    public function getUrl2(): string
+    {
+        return $this->url2;
+    }
 
-	public function send200forNonGET() {
-		header($_SERVER["SERVER_PROTOCOL"]." 200 OK.");
-		header("Cache-Control: no-cache, no-store, must-revalidate");
-	}
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
 
-	public function send201() {
-		header($_SERVER["SERVER_PROTOCOL"]." 201 OK.");
-		header("Cache-Control: no-cache, no-store, must-revalidate");
-	}
+    /**
+     * @return int
+     */
+    public function getPageSize(): int
+    {
+        return $this->pagesize;
+    }
 
-	public function send400() {
-		header($_SERVER["SERVER_PROTOCOL"]." 400 Data error.");
-		header("Cache-Control: no-cache, no-store, must-revalidate");
-	}
+    /**
+     * @return string
+     */
+    public function getRequestMethod(): string
+    {
+        return $this->requestMethod;
+    }
+
+    /**
+     * Send http respond.
+     *
+     * @param  mixed $json Returned string.
+     * @return string
+     */
+    public function send200forGET($json)
+    {
+        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
+        header("Cache-Control: public, max-age=86400");
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
+    /**
+     * Send http respond.
+     */
+    public function send200forNonGET()
+    {
+        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK.");
+        header("Cache-Control: no-cache, no-store, must-revalidate");
+    }
+
+    /**
+     * Send http respond.
+     */
+    public function send201()
+    {
+        header($_SERVER["SERVER_PROTOCOL"] . " 201 OK.");
+        header("Cache-Control: no-cache, no-store, must-revalidate");
+    }
+
+    /**
+     * Send http respond.
+     */
+    public function send400()
+    {
+        header($_SERVER["SERVER_PROTOCOL"] . " 400 Data error.");
+        header("Cache-Control: no-cache, no-store, must-revalidate");
+    }
+
+    /**
+     * Send http respond.
+     */
+    public function send404()
+    {
+        header($_SERVER["SERVER_PROTOCOL"] . " 404 Source not found.");
+        header("Cache-Control: no-cache, no-store, must-revalidate");
+    }
 }

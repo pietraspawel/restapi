@@ -1,5 +1,11 @@
 <?php
+
+/**
+ * Help site.
+ */
+
 namespace pietras;
+
 ?>
 <h1>REST API</h1>
 
@@ -55,8 +61,8 @@ Domyślnie przyjmują wartości, odpowiednio: <code>1</code> i <code>10</code>.<
         "description": "opis produktu"      opis produktu po polsku
     },
     "en": {
-        "name": "something",			
-        "description": "product\'s description"		
+        "name": "something",            
+        "description": "product\'s description"     
     }
 }
 </code></pre>
@@ -64,12 +70,16 @@ Domyślnie przyjmują wartości, odpowiednio: <code>1</code> i <code>10</code>.<
 <h4>Dla zapytania POST:</h4>
 <p><code>price</code> - nieobowiązkowe, domyślnie = <code>0</code><br />
 <code>quantity</code> - nieobowiązkowe, domyślnie = <code>0</code><br />
-<code><i>nazwa_języka</i></code> - musi być zdefiniowany przynajmniej jeden, w przykładowej bazie danych są to: pl, en i xx.<br />
+<code><i>nazwa_języka</i></code> - musi być zdefiniowany przynajmniej jeden, 
+w przykładowej bazie danych są to: pl, en i xx.<br />
 <code>name</code> - musi być określona nazwa przynajmniej w jednym języku<br />
 <code>description</code> - nieobowiązkowe, domyślnie pusty string</p>
 
 <h4>Dla zapytania PUT:</h4>
-<p>Żadne z pól nie jest obowiązkowe. Zostaną zaktualizowane tylko podane. Dodatkowo, jeśli dla produktu została podana nazwa i/lub opis w języku w którym wcześniej produkt nie został opisany, to nazwa i/lub opis w tym języku zostaną dodane do bazy (pod warunkiem oczywiście, że język istnieje w bazie).</p>
+<p>Żadne z pól nie jest obowiązkowe. Zostaną zaktualizowane tylko podane. 
+Dodatkowo, jeśli dla produktu została podana nazwa i/lub opis w języku w którym 
+wcześniej produkt nie został opisany, to nazwa i/lub opis w tym języku zostaną 
+dodane do bazy (pod warunkiem oczywiście, że język istnieje w bazie).</p>
 
 <h2>Przykłady zapytań w PHP cURL.</h2>
 <h4>Pobranie wszystkich produktów.</h4>
@@ -99,7 +109,7 @@ die();
         "description": "Litwo, Ojczyzno moja"
     },
     "en": {
-    	"name": "some thing"
+        "name": "some thing"
     }
 }';
 $ch = curl_init("http://restapi.demo.pietraspawel.pl/products");
@@ -120,8 +130,8 @@ die();
         "description": "fork\'s description"
     },
     "xx": {
-    	"name": "videlez",
-    	"description": "dsfsdf sdfsf"
+        "name": "videlez",
+        "description": "dsfsdf sdfsf"
     }
 }';
 $ch = curl_init("http://restapi.demo.pietraspawel.pl/products/10");

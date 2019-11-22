@@ -2,3 +2,4 @@
 *.sublime-project
 sftp-config.json
 config.ini
+*.bat
