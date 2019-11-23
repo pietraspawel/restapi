@@ -44,7 +44,8 @@
 
 ## Format JSONa.
 #### Przykład:
-```{
+```
+{
     "price": 123,                           cena produktu
     "quantity": 1234,                       ilość na stanie
     "pl": {                                 nazwa języka
@@ -74,7 +75,8 @@ dodane do bazy (pod warunkiem oczywiście, że język istnieje w bazie).
 
 ## Przykłady zapytań w PHP cURL.
 #### Pobranie wszystkich produktów.
-```$ch = curl_init("http://restapi.demo.pietraspawel.pl/products");
+```
+$ch = curl_init("http://restapi.demo.pietraspawel.pl/products");
 curl_setopt($ch, CURLOPT_USERPWD, "testuser:12345678");
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 curl_exec($ch);
@@ -83,7 +85,8 @@ die();
 ```
 
 #### Pobranie konkretnego produku.
-```$ch = curl_init("http://restapi.demo.pietraspawel.pl/products/10");
+```
+$ch = curl_init("http://restapi.demo.pietraspawel.pl/products/10");
 curl_setopt($ch, CURLOPT_USERPWD, "testuser:12345678");
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 curl_exec($ch);
@@ -92,7 +95,8 @@ die();
 ```
 
 #### Dodanie produktu.
-```$data = '
+```
+$data = '
 {
     "quantity": 8901,
     "pl": {
@@ -113,7 +117,8 @@ die();
 ```
 
 #### Aktualizacja produktu.
-```$data = '
+```
+$data = '
 {
     "price": 666,
     "quantity": 6666,
@@ -135,7 +140,8 @@ die();
 ```
 
 #### Usunięcie produktu.
-```$ch = curl_init("http://restapi.demo.pietraspawel.pl/products/12");
+```
+$ch = curl_init("http://restapi.demo.pietraspawel.pl/products/12");
 curl_setopt($ch, CURLOPT_USERPWD, "testuser:12345678");
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 curl_exec($ch);
