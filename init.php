@@ -19,7 +19,6 @@
 
 namespace pietras;
 
-spl_autoload_register(__NAMESPACE__ . "\autoload");
 $config["DEBUG"] = isset($config["DEBUG"]) ? $config["DEBUG"] : false;
 
 $rest = new RestApp();
