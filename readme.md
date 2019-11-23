@@ -1,17 +1,17 @@
 # REST API
 
 ## Autoryzacja.
-Odbywa się za pomocą Basic Auth.
-Dane dla testowej bazy:
-`testuser:12345678`
+* Odbywa się za pomocą Basic Auth.
+* Dane dla testowej bazy:
+* `testuser:12345678`
 
 ## Pobranie wszystkich produktów z bazy.
 #### Request:
-`GET /products?page=1&pagesize=10`
-Parametry `page` i `pagesize` są opcjonalne.
-Domyślnie przyjmują wartości, odpowiednio: `1` i `10`.
-`page` określa numer wyświetlanej strony.
-`pagesize` określa rozmiar strony.
+* `GET /products?page=1&pagesize=10`
+* Parametry `page` i `pagesize` są opcjonalne.
+* Domyślnie przyjmują wartości, odpowiednio: `1` i `10`.
+* `page` określa numer wyświetlanej strony.
+* `pagesize` określa rozmiar strony.
 
 #### Response:
 `200 OK`. Zwraca JSONa z listą produktów.
@@ -26,15 +26,15 @@ Domyślnie przyjmują wartości, odpowiednio: `1` i `10`.
 #### Request:
 `POST /products` + JSON
 #### Response:
-`201 OK`. Gdy produkt zostanie dodany do bazy.
-`400 Data error`. Gdy wystąpi błąd, najczęściej w strukturze JSONa.
+* `201 OK`. Gdy produkt zostanie dodany do bazy.
+* `400 Data error`. Gdy wystąpi błąd, najczęściej w strukturze JSONa.
 
 ## Aktualizacja produktu w bazie.
 #### Request:
 `PUT /products/id` + JSON
 #### Response:
-`200 OK`. Gdy produkt zostanie zaktualizowany.
-`400 Data error`. Gdy wystąpi błąd, najczęściej w strukturze JSONa.
+* `200 OK`. Gdy produkt zostanie zaktualizowany.
+* `400 Data error`. Gdy wystąpi błąd, najczęściej w strukturze JSONa.
 
 ## Usunięcie produktu z bazy.
 #### Request:
@@ -59,16 +59,16 @@ Domyślnie przyjmują wartości, odpowiednio: `1` i `10`.
 ```
 
 #### Dla zapytania POST:
-`price` - nieobowiązkowe, domyślnie = `0`
-`quantity` - nieobowiązkowe, domyślnie = `0`
-`<i>nazwa_języka</i>` - musi być zdefiniowany przynajmniej jeden, 
-w przykładowej bazie danych są to: pl, en i xx.
-`name` - musi być określona nazwa przynajmniej w jednym języku
-`description` - nieobowiązkowe, domyślnie pusty string
+* `price` - nieobowiązkowe, domyślnie = `0`
+* `quantity` - nieobowiązkowe, domyślnie = `0`
+* `<i>nazwa_języka</i>` - musi być zdefiniowany przynajmniej jeden, 
+* w przykładowej bazie danych są to: pl, en i xx.
+* `name` - musi być określona nazwa przynajmniej w jednym języku
+* `description` - nieobowiązkowe, domyślnie pusty string
 
 #### Dla zapytania PUT:
-Żadne z pól nie jest obowiązkowe. Zostaną zaktualizowane tylko podane. 
-Dodatkowo, jeśli dla produktu została podana nazwa i/lub opis w języku w którym 
+* Żadne z pól nie jest obowiązkowe. Zostaną zaktualizowane tylko podane. 
+* Dodatkowo, jeśli dla produktu została podana nazwa i/lub opis w języku w którym 
 wcześniej produkt nie został opisany, to nazwa i/lub opis w tym języku zostaną 
 dodane do bazy (pod warunkiem oczywiście, że język istnieje w bazie).
 
