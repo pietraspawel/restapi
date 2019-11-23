@@ -61,7 +61,7 @@
 #### Dla zapytania POST:
 * `price` - nieobowiązkowe, domyślnie = `0`
 * `quantity` - nieobowiązkowe, domyślnie = `0`
-* `<i>nazwa_języka</i>` - musi być zdefiniowany przynajmniej jeden, 
+* `_nazwa_języka_` - musi być zdefiniowany przynajmniej jeden, 
 * w przykładowej bazie danych są to: pl, en i xx.
 * `name` - musi być określona nazwa przynajmniej w jednym języku
 * `description` - nieobowiązkowe, domyślnie pusty string
