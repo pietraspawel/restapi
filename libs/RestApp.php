@@ -40,11 +40,11 @@ class RestApp
     public function __construct()
     {
         $this->setDebug(false);
-        $router = new Router();
-        $this->url1 = StringMethods::smallPlToLatin($router->getPathElement(1));
-        $this->url2 = StringMethods::smallPlToLatin($router->getPathElement(2));
-        $this->page = $this->calculatePage($router);
-        $this->pagesize = $this->calculatePagesize($router);
+        $url = new Url();
+        $this->url1 = StringMethods::smallPlToLatin($url->getPathElement(1));
+        $this->url2 = StringMethods::smallPlToLatin($url->getPathElement(2));
+        $this->page = $this->calculatePage($url);
+        $this->pagesize = $this->calculatePagesize($url);
         $this->requestMethod = $_SERVER["REQUEST_METHOD"];
     }
 
@@ -53,12 +53,12 @@ class RestApp
      *
      * Extract from url. Default is 1. Should be 1 or more.
      *
-     * @param  Router $router
+     * @param  Url $url
      * @return int
      */
-    private function calculatePage(Router $router): int
+    private function calculatePage(Url $url): int
     {
-        $urlParams = $router->getParams();
+        $urlParams = $url->getParams();
         $page = array_key_exists("page", $urlParams) ? intval($urlParams["page"]) : 1;
         if ($page < 1) {
             $page = 1;
@@ -71,12 +71,12 @@ class RestApp
      *
      * Extract from ur. Default is 10. Should be 10 or more.
      *
-     * @param  Router $router
+     * @param  Url $url
      * @return int
      */
-    private function calculatePagesize(Router $router): int
+    private function calculatePagesize(Url $url): int
     {
-        $urlParams = $router->getParams();
+        $urlParams = $url->getParams();
         $pagesize = array_key_exists("pagesize", $urlParams) ? intval($urlParams["pagesize"]) : 10;
         if ($pagesize < 10) {
             $pagesize = 10;

@@ -3,9 +3,9 @@
 namespace pietras;
 
 /**
- * Simple router.
+ * Provide url methods.
  */
-class Router
+class Url
 {
     /**
      * @var string $url Stores url.
